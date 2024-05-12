@@ -4,6 +4,7 @@
 #
 # We are a way for the cosmos to know itself.
 
+#Part 1
 carl  = {
           :toast => 'cosmos',
           :punctuation => [ ',', '.', '?' ],
@@ -19,6 +20,8 @@ sagan = [
 
       # We are a way for the cosmos to know itself.
 puts "#{carl[:words][2]} #{sagan[0][:are]} #{sagan[0]["A"]} #{sagan[1]['waaaaaay']} #{carl[:words][1]} #{sagan[1][:th3]} #{carl[:toast]} #{sagan[3][2][0]} #{carl[:words][0]} #{sagan[2]}#{carl[:punctuation][1]} "
+
+#Part 2
 puts "\n"
 ghosts = [
   { name: "Inky", age: 4, loves: "reindeers", net_worth: 25 },
@@ -35,3 +38,25 @@ ghosts.each do |ghost|
 end
 puts "\n"
 
+#Part 3
+
+require 'net/http'
+require 'json'
+require 'pp'
+ 
+url = 'https://dog.ceo/api/breeds/list/all'
+uri = URI(url)
+response = Net::HTTP.get(uri)
+dog_breeds = JSON.parse(response) # Convert JSON data into Ruby data.
+
+
+dog_breeds['message'].each do |breed, sub_breeds|
+  if sub_breeds.empty?
+    puts "* #{breed.capitalize}" 
+  else
+    puts "* #{breed.capitalize}"
+    sub_breeds.each do |sub_breed|
+      puts "  - #{sub_breed.capitalize}" 
+    end
+  end
+end

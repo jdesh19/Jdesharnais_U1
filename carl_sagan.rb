@@ -3,7 +3,7 @@
 # sagan array along with some string interpolation.
 #
 # We are a way for the cosmos to know itself.
-
+=begin
 #Part 1
 carl  = {
           :toast => 'cosmos',
@@ -39,24 +39,31 @@ end
 puts "\n"
 
 #Part 3
-
+=end
 require 'net/http'
 require 'json'
 require 'pp'
- 
+
+=begin
 url = 'https://dog.ceo/api/breeds/list/all'
 uri = URI(url)
 response = Net::HTTP.get(uri)
 dog_breeds = JSON.parse(response) # Convert JSON data into Ruby data.
 
 
-dog_breeds['message'].each do |breed, sub_breeds|
-  if sub_breeds.empty?
-    puts "* #{breed.capitalize}" 
-  else
-    puts "* #{breed.capitalize}"
-    sub_breeds.each do |sub_breed|
-      puts "  - #{sub_breed.capitalize}" 
-    end
+
+puts "\n"
+=end
+
+tree_url = 'https://data.winnipeg.ca/resource/d3jk-hb6j.json?%24limit=306000'
+tree_uri = URI(tree_url)
+tree_response = Net::HTTP.get(tree_uri)
+trees = JSON.parse(tree_response)
+
+tree_count = 0
+for tree in trees 
+  if tree['common_name']&.downcase&.include?("ash")
+    tree_count += 1
   end
 end
+puts "There are #{tree_count} Ash trees"
